@@ -1,7 +1,7 @@
 <template>
   <div>
     <span class="text-[12px] text-[#ADAFBC] font-[400]">À acheter</span>
-    <div class="mt-[6px]">
+    <div class="mt-[6px] max-h-[50vh] overflow-scroll">
       <div v-for="product in productsUnChecked" :key="product.libelle" class="flex items-center justify-between py-[15px] border-b border-b-[#ADAFBC]">
         <div class="flex items-center gap-[10px]" @click="emit('checkProduct', product)">
           <div class="w-[20px] h-[20px] bg-white rounded-full border border-primary-50" />
@@ -18,7 +18,7 @@
   </div>
   <div class="mt-[18px]">
     <span class="text-[12px] text-[#ADAFBC] font-[400]">Achetés</span>
-    <div class="mt-[6px]">
+    <div class="mt-[6px] max-h-[50vh] overflow-scroll">
       <div v-for="product in productsChecked" :key="product.libelle" class="flex items-center justify-between py-[15px] border-b border-b-[#ADAFBC]">
         <div class="flex items-center gap-[10px]" @click="emit('unCheckProduct', product)">
           <product-checked-icon />

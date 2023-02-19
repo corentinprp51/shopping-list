@@ -88,7 +88,7 @@
         {{ error }}
       </error-banner>
     </div>
-    <div class="flex justify-center w-full absolute bottom-[120px]">
+    <div class="flex justify-center w-full absolute bottom-[20px]">
       <div v-if="!isEditMode" class="flex flex-col w-full items-center gap-[20px]">
         <primary-button-reversed class="w-[60%] text-[14px] font-[400] text-[#FF7373] border-[#FF7373]" type="button" @click="isOpenModalLogout = true">
           Déconnexion

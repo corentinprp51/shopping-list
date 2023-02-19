@@ -1,9 +1,9 @@
 <template>
-  <div class="min-w-screen max-w-screen overflow-hidden">
+  <div class="fixed w-screen overflow-hidden">
     <!-- Flash Message Handler -->
     <flash-message-handler />
     <div :class="isMounted === true && route.name !== 'login' && route.name !== 'register' ? 'mt-[20px] content overflow-y-scroll' : ''">
-      <router-view />
+      <router-view class="min-height" />
     </div>
     <navbar v-if="isMounted === true && route.name !== 'login' && route.name !== 'register' && route.name !== 'get-list'" />
     <navbar-products-list v-if="isMounted === true && route.name === 'get-list'" />
@@ -25,3 +25,9 @@ onMounted(async () => {
   isMounted.value = true
 })
 </script>
+<style>
+.min-height {
+  height: calc(100vh - 120px);
+  overflow-y: scroll;
+}
+</style>

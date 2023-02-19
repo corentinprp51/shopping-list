@@ -2,7 +2,7 @@
   <input
     v-bind="$attrs"
     v-model="propsValue"
-    class="w-full rounded-[10px] p-[12px] font-[400] focus:outline-none focus:border-primary-50 shadow"
+    class="w-full rounded-[10px] p-[12px] font-[400] focus:outline-none focus:border-primary-50 border shadow"
   >
 </template>
 
