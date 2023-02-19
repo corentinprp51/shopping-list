@@ -3,7 +3,7 @@
     <!-- Flash Message Handler -->
     <flash-message-handler />
     <div :class="isMounted === true && route.name !== 'login' && route.name !== 'register' ? 'mt-[20px] content overflow-y-scroll' : ''">
-      <router-view class="min-height" />
+      <router-view :class="isMounted && route.name !== 'login' && route.name !== 'register' ? 'min-height' : ''" />
     </div>
     <navbar v-if="isMounted === true && route.name !== 'login' && route.name !== 'register' && route.name !== 'get-list'" />
     <navbar-products-list v-if="isMounted === true && route.name === 'get-list'" />
