@@ -29,7 +29,7 @@ onMounted(async () => {
   isMounted.value = true
 })
 </script>
-<style scoped>
+<style>
 .min-height {
   height: calc(100vh - 120px);
   overflow-y: scroll;

@@ -1,46 +1,48 @@
 <template>
-  <div v-if="shoppingList && shoppingListStore.shoppingList" class="px-[15px]">
-    <div class="header mt-[40px]">
-      <div class="flex justify-between">
-        <router-link :to="{ name: 'get-list', params: { id: route.params.id } }">
-          <arrow-back />
-        </router-link>
-        <div class="flex">
-          <div v-for="(user, index) in shoppingList.users" :key="user.uid" class="rounded-full w-[20px] h-[20px] bg-gray-300">
-            <img v-if="photosURL.length > index" :src="photosURL[index]" alt="">
+  <div>
+    <div v-if="shoppingList && shoppingListStore.shoppingList" class="px-[15px]">
+      <div class="header mt-[40px]">
+        <div class="flex justify-between">
+          <router-link :to="{ name: 'get-list', params: { id: route.params.id } }" style="-webkit-tap-highlight-color: transparent">
+            <arrow-back />
+          </router-link>
+          <div class="flex">
+            <div v-for="(user, index) in shoppingList.users" :key="user.uid" class="rounded-full w-[20px] h-[20px] bg-gray-300">
+              <img v-if="photosURL.length > index" :src="photosURL[index]" alt="">
+            </div>
           </div>
         </div>
+        <div class="flex items-center gap-[10px] mt-[19px]">
+          <img
+            v-if="listUrl"
+            :src="listUrl"
+            class="w-[40px] h-[40px]"
+            alt=""
+          >
+          <div v-else class="rounded-full w-[40px] h-[40px] bg-gray-100" />
+          <span class="text-black font-[400] text-[20px]">{{ shoppingListStore.shoppingList.title }}</span>
+          <span @click="isModalOpen = true"><delete-icon /></span>
+        </div>
       </div>
-      <div class="flex items-center gap-[10px] mt-[19px]">
-        <img
-          v-if="listUrl"
-          :src="listUrl"
-          class="w-[40px] h-[40px]"
-          alt=""
-        >
-        <div v-else class="rounded-full w-[40px] h-[40px] bg-gray-100" />
-        <span class="text-black font-[400] text-[20px]">{{ shoppingListStore.shoppingList.title }}</span>
-        <span @click="isModalOpen = true"><delete-icon /></span>
+      <div class="form-edit mt-[35px]">
+        <edit-shopping-list-form v-model="shoppingList" :img-url="listUrl" @submit="editShoppingList($event)" />
       </div>
+      <error-banner v-if="error" class="mt-[20px] w-full text-center">
+        {{ error }}
+      </error-banner>
     </div>
-    <div class="form-edit mt-[35px]">
-      <edit-shopping-list-form v-model="shoppingList" :img-url="listUrl" @submit="editShoppingList($event)" />
-    </div>
-    <error-banner v-if="error" class="mt-[20px] w-full text-center">
-      {{ error }}
-    </error-banner>
-  </div>
-  <loader v-else />
-  <div v-if="isModalOpen" class="overlay h-screen w-full bg-[rgba(0,0,0,0.7)] absolute top-0 z-10" @click="isModalOpen = false" />
-  <div v-if="isModalOpen && shoppingListStore.shoppingList" class="modal bg-white z-20 absolute w-[80%] h-[200px] top-[50%] left-[50%] rounded-[15px] shadow flex flex-col items-center justify-center">
-    <span class="text-[#434242] text-[20px] font-[400]">Supprimer <span class="font-semibold">{{ shoppingListStore.shoppingList.title }}</span> ?</span>
-    <div class="flex gap-[20px] items-center justify-center w-full mt-[20px]">
-      <primary-button class="w-[30%]" @click="removeShoppingList">
-        Confirmer
-      </primary-button>
-      <primary-button-reversed class="w-[30%]" @click="isModalOpen = false">
-        Annuler
-      </primary-button-reversed>
+    <loader v-else />
+    <div v-if="isModalOpen" class="overlay h-screen w-full bg-[rgba(0,0,0,0.7)] absolute top-0 z-10" @click="isModalOpen = false" />
+    <div v-if="isModalOpen && shoppingListStore.shoppingList" class="modal bg-white z-20 absolute w-[80%] h-[200px] top-[50%] left-[50%] rounded-[15px] shadow flex flex-col items-center justify-center">
+      <span class="text-[#434242] text-[20px] font-[400]">Supprimer <span class="font-semibold">{{ shoppingListStore.shoppingList.title }}</span> ?</span>
+      <div class="flex gap-[20px] items-center justify-center w-full mt-[20px]">
+        <primary-button class="w-[30%]" @click="removeShoppingList">
+          Confirmer
+        </primary-button>
+        <primary-button-reversed class="w-[30%]" @click="isModalOpen = false">
+          Annuler
+        </primary-button-reversed>
+      </div>
     </div>
   </div>
 </template>

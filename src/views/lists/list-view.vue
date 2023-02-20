@@ -2,7 +2,7 @@
   <div v-if="!state.isPreloading && state.list && state.list.products" class="px-[15px]">
     <div class="header mt-[40px]">
       <div class="flex justify-between">
-        <router-link to="/">
+        <router-link to="/" style="-webkit-tap-highlight-color: transparent">
           <arrow-back />
         </router-link>
         <div class="flex">

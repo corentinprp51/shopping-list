@@ -3,21 +3,31 @@
     <div class="h-[105px]">
       <ul class="h-full flex justify-around items-center">
         <li>
-          <router-link v-if="userRole === 'owner'" :to="{ name: 'edit-list', params: { id: route.params.id } }">
-            <edit-icon />
+          <router-link
+            v-if="userRole === 'owner'"
+            :to="{ name: 'edit-list', params: { id: route.params.id } }"
+            style="-webkit-tap-highlight-color: transparent"
+            @click="addAnimation(1)"
+          >
+            <edit-icon :class="elementToAnimate === 1 ? 'clickedButton' : ''" />
           </router-link>
-          <router-link v-else to="/">
-            <home-icon />
+          <router-link
+            v-else
+            to="/"
+            style="-webkit-tap-highlight-color: transparent"
+            @click="addAnimation(1)"
+          >
+            <home-icon :class="elementToAnimate === 1 ? 'clickedButton' : ''" />
           </router-link>
         </li>
         <li>
-          <div @click="openModal">
-            <add-product-icon />
+          <div style="-webkit-tap-highlight-color: transparent" @click="openModal">
+            <add-product-icon :class="elementToAnimate === 2 ? 'clickedButton' : ''" />
           </div>
         </li>
         <li>
-          <div @click="copyInvitationLink">
-            <add-user-icon />
+          <div style="-webkit-tap-highlight-color: transparent" @click="copyInvitationLink">
+            <add-user-icon :class="elementToAnimate === 3 ? 'clickedButton' : ''" />
           </div>
         </li>
       </ul>
@@ -65,6 +75,11 @@ const product: Omit<Product, "id"> = reactive({
   libelle: '',
   checked: false,
 })
+const elementToAnimate = ref<number>(0)
+const addAnimation = (number: number) => {
+  elementToAnimate.value = number
+  setTimeout(() => elementToAnimate.value = 0, 500)
+}
 
 onMounted(async () => {
   if (route.params.id as string && userStore.user) {
@@ -75,6 +90,7 @@ onMounted(async () => {
 })
 
 const openModal = () => {
+  addAnimation(2)
   isModalOpen.value = true
   setTimeout(() => {
     const input: HTMLElement | null = document.getElementById('input')
@@ -95,6 +111,7 @@ const addProduct = async () => {
 }
 
 const copyInvitationLink = () => {
+  addAnimation(3)
   if (shoppingListStore.shoppingList) {
     FlashMessagesService.getInstance().success(`Lien d'invitation copié !`)
     return navigator.clipboard.writeText(shoppingListStore.shoppingList.invitation_link)
@@ -117,5 +134,18 @@ watch(isModalOpen, () => {
 }
 .modal {
   transform: translate(-50%, -50%);
+}
+
+.clickedButton {
+  animation: scaleOnClick 0.5s;
+}
+
+@keyframes scaleOnClick {
+  0%,100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
 }
 </style>
