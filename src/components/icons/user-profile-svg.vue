@@ -1,11 +1,14 @@
 <template>
   <svg
-    width="390"
-    height="213"
-    viewBox="0 0 390 213"
+    viewBox="0 0 500 280"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M0 0H390V174.331L251.408 206.512C216.01 214.731 179.212 214.839 143.767 206.827L0 174.331V0Z" fill="#FF7373" />
+    <path
+      d="M 0 0 L 500 0 L 500 229.429 L 322.318 271.781 C 276.936 282.598 229.759 282.74 184.317 272.196 L 0 229.429 L 0 0 Z"
+      fill="#FF7373"
+      style=""
+      bx:origin="0.501868 0.5"
+    />
   </svg>
 </template>

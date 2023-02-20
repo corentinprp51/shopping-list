@@ -1,6 +1,6 @@
 <template>
   <div v-if="userStore.user">
-    <div class="header">
+    <div class="header fixed w-full top-0">
       <div class="z-20 relative mt-[19px] flex flex-col items-center">
         <div>
           <div v-if="!isEditMode">
@@ -27,9 +27,9 @@
         </div>
         <span class="text-white font-[400] text-[18px] mt-[5px]">{{ userStore.user.firstname }} {{ userStore.user.lastname }}</span>
       </div>
-      <user-profile-svg class="absolute top-0 z-10" />
+      <user-profile-svg id="header" class="absolute top-0 z-10 w-full" />
     </div>
-    <div v-if="!isEditMode" class="content mt-[90px] px-[15px]">
+    <div v-if="!isEditMode" class="content px-[15px]" :style="{ marginTop: `${headerSize}px` }">
       <div class="flex gap-[20px] items-center border-b border-b-[#ADAFBC] py-[13px]">
         <user-profile-icon />
         <span>{{ userStore.user.firstname }}</span>
@@ -88,22 +88,24 @@
         {{ error }}
       </error-banner>
     </div>
-    <div class="flex justify-center w-full absolute bottom-[20px]">
-      <div v-if="!isEditMode" class="flex flex-col w-full items-center gap-[20px]">
-        <primary-button-reversed class="w-[60%] text-[14px] font-[400] text-[#FF7373] border-[#FF7373]" type="button" @click="isOpenModalLogout = true">
-          Déconnexion
-        </primary-button-reversed>
-        <primary-button class="w-[60%] text-[14px] font-[400] bg-[#FF7373]" @click="isEditMode = true">
-          Modifier le profil
-        </primary-button>
-      </div>
-      <div v-else class="flex gap-[15px] w-full px-[15px]">
-        <primary-button class="w-[60%] text-[14px] font-[400] bg-[#FF7373]" type="submit" @click.prevent="editUser()">
-          Confirmer
-        </primary-button>
-        <primary-button-reversed class="w-[60%] text-[14px] font-[400] text-[#FF7373] border-[#FF7373]" type="button" @click="isEditMode = false">
-          Annuler
-        </primary-button-reversed>
+    <div class="relative h-[150px] mt-[50px]">
+      <div class="flex justify-center w-full absolute bottom-[20px]">
+        <div v-if="!isEditMode" class="flex flex-col w-full items-center gap-[20px]">
+          <primary-button-reversed class="w-[60%] text-[14px] font-[400] text-[#FF7373] border-[#FF7373]" type="button" @click="isOpenModalLogout = true">
+            Déconnexion
+          </primary-button-reversed>
+          <primary-button class="w-[60%] text-[14px] font-[400] bg-[#FF7373]" @click="isEditMode = true">
+            Modifier le profil
+          </primary-button>
+        </div>
+        <div v-else class="flex gap-[15px] w-full px-[15px]">
+          <primary-button class="w-[60%] text-[14px] font-[400] bg-[#FF7373]" type="submit" @click.prevent="editUser()">
+            Confirmer
+          </primary-button>
+          <primary-button-reversed class="w-[60%] text-[14px] font-[400] text-[#FF7373] border-[#FF7373]" type="button" @click="isEditMode = false">
+            Annuler
+          </primary-button-reversed>
+        </div>
       </div>
     </div>
     <div v-if="openModalPassword" class="overlay h-screen w-full bg-[rgba(0,0,0,0.7)] absolute top-0 z-10" @click="openModalPassword = false" />
@@ -198,9 +200,11 @@ const isOpenModalPreview = reference(false)
 const isOpenModalLogout = reference(false)
 const previewImage = reference('')
 const isPreloading = reference(false)
+const headerSize = reference<number | null>(null)
 
 onMounted(async () => {
   if (userStore.user) {
+    headerSize.value = document.getElementById('header')?.clientHeight || 0;
     userEditForm.firstname = userStore.user.firstname
     userEditForm.lastname = userStore.user.lastname
     userEditForm.username = userStore.user.username

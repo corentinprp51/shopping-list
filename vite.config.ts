@@ -22,8 +22,10 @@ export default defineConfig({
         name: 'Shopping List',
         short_name: 'Shopping List',
         description: 'Shopping List Application',
-        theme_color: '#ffffff',
+        theme_color: '#E23E3E',
+        background_color: '#E23E3E',
         start_url: '/',
+        orientation: "portrait",
         icons: [
           {
             src: 'pwa-192x192.png',
