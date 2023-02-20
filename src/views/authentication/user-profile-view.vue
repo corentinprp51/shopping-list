@@ -47,7 +47,7 @@
         <span>{{ userStore.user.email }}</span>
       </div>
     </div>
-    <div v-else class="content mt-[90px] px-[15px]">
+    <div v-else class="content px-[15px]" :style="{ marginTop: `${headerSize}px` }">
       <div class="flex gap-[20px] items-center border-b border-b-[#ADAFBC]">
         <user-profile-icon />
         <input v-model="userEditForm.firstname" type="text" class="py-[13px] w-full">
