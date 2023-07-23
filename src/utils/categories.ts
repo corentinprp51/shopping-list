@@ -1,22 +1,25 @@
 export const CATEGORIES = [
+    'Entretien',
+    'Hygiène',
+    'Fruits & Légumes',
     'Lait / Oeufs',
     'Yaourts',
     'Fromages',
-    'Céréales',
     'Boulangerie',
-    'Viandes',
+    'Céréales',
     'Boucherie / Charcuterie',
+    'Viandes',
     'Poissons',
-    'Conserves',
-    'Fruits & Légumes',
+    'Plats préparés',
     'Congelés',
     'Féculents',
+    'Conserves',
     'Sauces',
     'Condiments',
     'Gâteaux sucrés',
     'Confiserie',
-    'Plats préparés',
-    'Boissons'
+    'Boissons',
+    'Autres'
 ]
 
 export const getCategoriesOptions = () => {
