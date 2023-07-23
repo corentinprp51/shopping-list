@@ -21,7 +21,7 @@
           >
           <div v-else class="rounded-full w-[40px] h-[40px] bg-gray-100" />
           <span class="text-black font-[400] text-[20px]">{{ shoppingListStore.shoppingList.title }}</span>
-          <span @click="isModalOpen = true"><delete-icon /></span>
+          <span @click="isModalOpen = true"><delete-icon class="delete-icon" /></span>
         </div>
       </div>
       <div class="form-edit mt-[35px]">

@@ -16,4 +16,5 @@ export interface Product {
     id: string;
     libelle: string;
     checked: boolean;
+    category: string;
 }

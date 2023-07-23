@@ -5,9 +5,8 @@
         <input-generic-with-label
           v-model="propsValue.title"
           label="Libellé"
-          type="email"
           class="w-full"
-          placeholder="Adresse mail"
+          placeholder="Nom de la liste"
           required
         />
       </div>

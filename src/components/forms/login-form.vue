@@ -15,7 +15,7 @@
           v-model="propsValue.password"
           class="w-[324px] mt-[24px]"
           type="password"
-          placeholder="Password"
+          placeholder="Mot de passe"
           required
         />
       </div>

@@ -3,7 +3,7 @@
     <label class="text-[12px] font-[300] italic text-[#ADAFBC]">Lien d'invitation</label>
   </div>
   <div class="grid grid-cols-2 gap-[10px]">
-    <input-generic v-model="propsValue" required />
+    <input-generic v-model="propsValue" required placeholder="Code d'invitation" />
     <primary-button type="button" @click.prevent="generateLink">
       Générer
     </primary-button>

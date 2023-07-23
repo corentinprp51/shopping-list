@@ -34,16 +34,18 @@
     </div>
   </div>
   <div v-if="isModalOpen" class="overlay h-screen w-full bg-[rgba(0,0,0,0.7)] absolute top-0 z-10" @click="isModalOpen = false" />
-  <div v-if="isModalOpen" class="modal bg-white z-20 absolute w-[80%] h-[200px] top-[50%] left-[50%] rounded-[15px] shadow flex flex-col items-center justify-center">
+  <div v-if="isModalOpen" class="modal bg-white z-20 absolute w-[95%] min-h-[200px] top-[50%] left-[50%] rounded-[15px] shadow flex flex-col items-center justify-center py-4">
     <span class="text-[#434242] text-[20px] font-[400]">Ajouter un produit</span>
-    <form class="flex flex-col items-center justify-center w-[60%] mt-[16px]" @submit.prevent="addProduct">
+    <form class="flex flex-col gap-[10px] items-center justify-center w-[80%] mt-[16px]" @submit.prevent="addProduct">
       <input-generic
         id="input"
         ref="input"
         v-model="product.libelle"
+        placeholder="Nom du produit"
         class="w-full text-[14px]"
       />
-      <primary-button class="w-full mt-[16px] text-[14px]">
+      <input-select-generic v-model="product.category" :options="getCategoriesOptions()" class="w-full text-sm" />
+      <primary-button class="w-full mt-[5px] text-[14px]">
         Ajouter
       </primary-button>
     </form>
@@ -65,6 +67,8 @@ import InputGeneric from '@/components/inputs/input-generic.vue';
 import PrimaryButton from '@/components/buttons/primary-button.vue';
 import { useShoppingListStore } from '@/store/shoppingListStore';
 import FlashMessagesService from '@/services/FlashMessagesService';
+import InputSelectGeneric from '@/components/inputs/input-select-generic.vue';
+import { getCategoriesOptions } from '@/utils/categories';
 
 const userStore = useUserStore()
 const shoppingListStore = useShoppingListStore()
@@ -74,6 +78,7 @@ const isModalOpen = ref(false)
 const product: Omit<Product, "id"> = reactive({
   libelle: '',
   checked: false,
+  category: ''
 })
 const elementToAnimate = ref<number>(0)
 const addAnimation = (number: number) => {
